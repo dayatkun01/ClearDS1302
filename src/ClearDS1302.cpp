@@ -155,6 +155,10 @@ ClearDS1302::ClearDS1302(int DATpin, int RSTpin, int CLKpin) {
     pinMode(_RTCclkPin, OUTPUT);
 
     RTCwrite(0x8E, 0x00);
+
+    byte sec = RTCread(0x80);    
+    sec &= 0x7F;                  
+    RTCwrite(0x80, sec);          
 }
 
 void ClearDS1302::reset() {
@@ -510,4 +514,5 @@ void ClearDS1302::print::time::date() {
 
 void ClearDS1302::settings::AAA__CommingSoon() {
     Serial.println("I told you already this is Comming Soon");
+
 }
